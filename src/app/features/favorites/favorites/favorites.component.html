@@ -1,0 +1,21 @@
+<app-header></app-header>
+
+<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="px-4 py-6 sm:px-0">
+        <h1 class="text-2xl font-semibold text-gray-900 mb-6">My Favorites</h1>
+
+        <div *ngIf="loading$ | async" class="py-12">
+            <app-loader></app-loader>
+        </div>
+
+        <ng-container *ngIf="favoriteJobs$ | async as jobs">
+            <div *ngIf="jobs.length === 0 && !(loading$ | async)" class="text-center py-12 text-gray-500">
+                You haven't saved any jobs yet.
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <app-job-card *ngFor="let job of jobs" [job]="job"></app-job-card>
+            </div>
+        </ng-container>
+    </div>
+</div>
