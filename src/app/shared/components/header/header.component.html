@@ -1,0 +1,45 @@
+<nav class="bg-indigo-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <a routerLink="/" class="text-white font-bold text-xl">JobFinder</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a routerLink="/jobs" routerLinkActive="bg-indigo-700 text-white"
+                            [routerLinkActiveOptions]="{exact: true}"
+                            class="text-indigo-100 hover:bg-indigo-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Find
+                            Jobs</a>
+
+                        <ng-container *ngIf="authService.currentUser() as user">
+                            <a routerLink="/favorites" routerLinkActive="bg-indigo-700 text-white"
+                                class="text-indigo-100 hover:bg-indigo-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Favorites</a>
+                            <a routerLink="/applications" routerLinkActive="bg-indigo-700 text-white"
+                                class="text-indigo-100 hover:bg-indigo-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Applications</a>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:block">
+                <div class="ml-4 flex items-center md:ml-6">
+                    <ng-container *ngIf="authService.currentUser() as user; else loginBtn">
+                        <span class="text-indigo-100 text-sm mr-4">Welcome, {{ user.firstName }}</span>
+                        <button (click)="logout()"
+                            class="text-indigo-100 hover:bg-indigo-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            Logout
+                        </button>
+                    </ng-container>
+                    <ng-template #loginBtn>
+                        <a routerLink="/login"
+                            class="text-indigo-100 hover:bg-indigo-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log
+                            in</a>
+                        <a routerLink="/register"
+                            class="bg-indigo-500 text-white hover:bg-indigo-400 px-3 py-2 rounded-md text-sm font-medium ml-2">Sign
+                            up</a>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
