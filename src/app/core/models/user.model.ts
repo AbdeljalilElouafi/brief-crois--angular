@@ -1,7 +1,7 @@
 export interface User {
     id?: string;
     email: string;
-    password?: string; // Optional for security when stored in frontend
+    password?: string;
     firstName: string;
     lastName: string;
 }

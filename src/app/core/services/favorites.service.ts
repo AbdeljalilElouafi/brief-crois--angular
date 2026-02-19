@@ -5,16 +5,13 @@ import { Job } from './job.service';
 import { AuthService } from './auth.service';
 
 export interface Favorite {
-    id?: number; // JSON Server auto-id
+    id?: number;
     userId: number | string;
     offerId: string;
     title: string;
     company: string;
     location: string;
-    jobObject: Job; // Store the whole object for easy display? Or just fields. Requirement says: title, company, location. But we need URL etc for "Voir l'offre".
-    // Requirement example:
-    // "id": 1, "userId": 2, "offerId": 101, "title": "...", "company": "...", "location": "..."
-    // It doesn't explicitly ban other fields. Storing full Job object is safer for display.
+    jobObject: Job;
 }
 
 @Injectable({
@@ -50,6 +47,5 @@ export class FavoritesService {
         return this.http.delete<void>(`${this.apiUrl}/${favoriteId}`);
     }
 
-    // Helper to check if job is favorite? 
-    // We can handle this in NgRx selector.
+
 }

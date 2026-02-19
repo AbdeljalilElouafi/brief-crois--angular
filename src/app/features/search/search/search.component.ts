@@ -26,8 +26,7 @@ export class SearchComponent {
   page = 1;
 
   constructor() {
-    // Initial search or setup reactive listeners if desired.
-    // For now, let's trigger search on submit or debounce.
+
     this.onSearch();
   }
 

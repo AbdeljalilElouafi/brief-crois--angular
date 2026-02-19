@@ -4,15 +4,16 @@
     <div class="px-4 py-6 sm:px-0">
         <h1 class="text-2xl font-semibold text-gray-900 mb-6">My Applications</h1>
 
-        <div *ngIf="loading" class="py-12">
+        <div *ngIf="loading$ | async" class="py-12">
             <app-loader></app-loader>
         </div>
 
-        <div *ngIf="!loading && applications.length === 0" class="text-center py-12 text-gray-500">
+        <div *ngIf="!(loading$ | async) && applications.length === 0" class="text-center py-12 text-gray-500">
             You are not tracking any applications yet.
         </div>
 
-        <div *ngIf="!loading && applications.length > 0" class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div *ngIf="!(loading$ | async) && applications.length > 0"
+            class="bg-white shadow overflow-hidden sm:rounded-lg">
             <ul role="list" class="divide-y divide-gray-200">
                 <li *ngFor="let app of applications"
                     class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">

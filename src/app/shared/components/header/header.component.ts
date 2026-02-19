@@ -13,8 +13,6 @@ import { AuthService } from '../../../core/services/auth.service';
 export class HeaderComponent {
   authService = inject(AuthService);
 
-  // Use a computed signal or just method access in template
-  // authService.currentUser is a signal
 
   logout() {
     this.authService.logout();

@@ -10,14 +10,15 @@ export interface Application {
     id?: number;
     userId: number | string;
     offerId: string;
-    apiSource: 'The Muse' | 'Arbeitnow'; // or string
+    apiSource: 'The Muse' | 'Arbeitnow';
     title: string;
     company: string;
     location: string;
     url: string;
     status: ApplicationStatus;
     notes: string;
-    dateAdded: string; // ISO
+    dateAdded: string;
+    jobObject: Job;
 }
 
 @Injectable({
@@ -48,7 +49,8 @@ export class ApplicationsService {
             url: job.url,
             status: 'en_attente',
             notes: '',
-            dateAdded: new Date().toISOString()
+            dateAdded: new Date().toISOString(),
+            jobObject: job
         };
         return this.http.post<Application>(this.apiUrl, app);
     }

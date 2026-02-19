@@ -8,7 +8,7 @@ export interface Job {
     title: string;
     company: string;
     location: string;
-    date: string; // ISO string
+    date: string;
     url: string;
     description: string;
     source: 'The Muse' | 'Arbeitnow';
@@ -40,20 +40,11 @@ export class JobService {
     }
 
     private searchMuse(keyword: string, location: string, page: number): Observable<Job[]> {
-        // The Muse allows filtering by 'category', 'location', 'level'. 'page'.
-        // Not directly by keyword in the same way, but let's see. 
-        // Docs say: category=Software%20Engineer usually works.
-        // If exact keyword search isn't supported, we might need to filter client side or use a different parameter.
-        // Let's assume standard params for now and refine.
-        // Actually, The Muse API doesn't have a 'q' or 'keyword' param documented in my research.
-        // It has 'category' and 'level'.
-        // Arbeitnow has `search` or `tags`?
+
 
         let params: any = { page: page };
         if (location) params.location = location;
-        // For keyword, we might need to rely on client filtering if API doesn't support it.
-        // However, let's try to pass it? No, strict APIs typically ignore or error.
-        // Let's fetch and filter client side for The Muse if needed, or just use what we can.
+
 
         return this.http.get<any>(this.museApiUrl, { params }).pipe(
             map(response => {
@@ -76,10 +67,7 @@ export class JobService {
     }
 
     private searchArbeitnow(keyword: string, location: string, page: number): Observable<Job[]> {
-        // Arbeitnow doesn't seem to have a search endpoint with q param in the simple docs I found.
-        // It lists all jobs at /job-board-api.
-        // Let's check if there is a search param.
-        // Assuming we fetch list and filter.
+
         return this.http.get<any>(this.arbeitnowApiUrl, { params: { page } }).pipe(
             map(response => {
                 return response.data.map((item: any) => ({
